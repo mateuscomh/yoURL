@@ -1,27 +1,19 @@
 #!/usr/bin/env sh
 
 #-----------HEADER-------------------------------------------------------------|
-# AUTOR             : Matheus Martins 3mhenrique@gmail.com
-# HOMEPAGE          : https://github.com/mateuscomh
-# DATA CRIAÇÃO      : 30/03/2021
-# PROGRAMA          : Shell-Base
-# VERSÃO            : 1.4
-# LICENÇA           : GPL3
-# PEQUENA-DESCRIÇÃO : Encurtador de URL e envio de arquivos para 0x0.st.
+#  Matheus Martins 3mhenrique@gmail.com
+#  https://github.com/mateuscomh
+#  30/03/2021
+#  1.4
+#  GPL3
+#  Encurtador de URL e envio de arquivos para 0x0.st.
 #
 #------------------------------------------------------------------------------|
-
-#--------------------------------- VARIÁVEIS ---------------------------------->
-fecha="\033[m"
-verde="\033[32;1m"
-vermelho="\033[31;1m"
-branco="\033[37;1m"
-#------------------------------- FIM-VARIÁVEIS --------------------------------<
 
 
 case "$1" in
   -h | --help | '' ) echo "Encurtador de links e  envio de arquivos e imagens para 0x0.st"
-  echo $branco "Utilizar postweb.sh + path imagem/arquivo ou endereço" $fecha
+  echo "Utilizar postweb.sh + path imagem/arquivo ou endereço" 
   exit 0
   ;;
 
