@@ -9,11 +9,7 @@
 # LICENÇA           : GPL3
 # PEQUENA-DESCRIÇÃO : Encurtador de URL e envio de arquivos para 0x0.st.
 #
-# CHANGELOG : 
-#           30/03/2021 - Adicionado cabeçalho e refinado detalhes de formatação
-#
 #------------------------------------------------------------------------------|
-
 
 #--------------------------------- VARIÁVEIS ---------------------------------->
 fecha="\033[m"
@@ -35,10 +31,15 @@ case "$1" in
 
   *) 
     if [ ! -f "$1" ] ; then
-      TEXT=$(curl -sF"shorten=$1" https://0x0.st)
-      echo "$TEXT"
-      notify-send -h int:value:40 "Link encurtado com sucesso"; xmessage -title "Send" -buttons "Close" -nearmouse "$TEXT"
-      exit 0
+      #TEXT=$(curl -sF"shorten=$1" https://0x0.st)
+      TEXT=$(curl -s http://tinyurl.com/api-create.php?url=$1)
+      if [ $? -eq "0" ] ; then
+        echo "$TEXT"
+        notify-send -h int:value:40 "Link encurtado com sucesso"; xmessage -title "Send" -buttons "Close" -nearmouse "$TEXT"
+        return 0
+      else
+        exit 1
+      fi
    fi
       ;;
 esac
