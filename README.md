@@ -11,8 +11,9 @@ _depends: curl, xclip, pbcopy(on MacOS) _
 
 
 ---
-### Notes
+# Notes
 Maximum file size: 512.0 MiB
+
 Blocked file types: application/x-dosexec, application/x-executable, application/x-hdf5, application/java-archive, Android APKs and system images
 
 TERMS OF SERVICE
