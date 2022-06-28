@@ -11,7 +11,7 @@ _depends: curl, xclip, pbcopy(on MacOS) _
 
 
 ---
-# Notes
+### Notes
 Maximum file size: 512.0 MiB
 
 Blocked file types: application/x-dosexec, application/x-executable, application/x-hdf5, application/java-archive, Android APKs and system images
@@ -19,17 +19,17 @@ Blocked file types: application/x-dosexec, application/x-executable, application
 TERMS OF SERVICE
 ----------------
 
-0x0.st is NOT a platform for:
-    - piracy
-    - pornography and gore
-    - extremist material of any kind
-    - malware / botnet C&C
-    - anything related to crypto currencies
-    - backups (yes, this includes your minecraft stuff, seriously
-      people have been dumping terabytes of it here for years)
-    - CI build artifacts
-    - doxxing, database dumps containing personal information
-    - anything illegal under German law
+This is NOT a platform for:
+- piracy
+- pornography and gore
+- extremist material of any kind
+- malware / botnet C&C
+- anything related to crypto currencies
+- backups (yes, this includes your minecraft stuff, seriously
+    people have been dumping terabytes of it here for years)
+- CI build artifacts
+- doxxing, database dumps containing personal information
+- anything illegal under German law
     
     
     
