@@ -5,6 +5,6 @@
 
 Send files direct from terminal to https://0x0.st or short url by https://tinyurl.com
 
-- Run on GNU Linux
+- Run on GNU Linux and MacOS
 
-_depends: *curl*, *xclip*_
+_depends: curl, xclip, pbcopy(on MacOS) _
