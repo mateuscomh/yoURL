@@ -1,5 +1,18 @@
-# URL shortner and upload files on terminal
+```
+                    $$\   $$\ $$$$$$$\  $$\       
+                    $$ |  $$ |$$  __$$\ $$ |      
+$$\   $$\  $$$$$$\  $$ |  $$ |$$ |  $$ |$$ |      
+$$ |  $$ |$$  __$$\ $$ |  $$ |$$$$$$$  |$$ |      
+$$ |  $$ |$$ /  $$ |$$ |  $$ |$$  __$$< $$ |      
+$$ |  $$ |$$ |  $$ |$$ |  $$ |$$ |  $$ |$$ |      
+\$$$$$$$ |\$$$$$$  |\$$$$$$  |$$ |  $$ |$$$$$$$$\ 
+ \____$$ | \______/  \______/ \__|  \__|\________|
+$$\   $$ |                                        
+\$$$$$$  |                                        
+ \______/ 
+ ```
 
+# URL shortner and upload files on terminal
 ![screenshot](https://raw.githubusercontent.com/mateuscomh/yoURL/main/files/screenshot.png)
 
 
