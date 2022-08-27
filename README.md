@@ -12,22 +12,33 @@ $$\   $$ |
  \______/ 
  ```
 
-# URL shortner and upload files on terminal
-![screenshot](https://raw.githubusercontent.com/mateuscomh/yoURL/main/files/screenshot.png)
-
-
+# URL shortner and upload files direct from terminal
 Send files direct from terminal to https://0x0.st or short url by https://tinyurl.com
 
-- Run on GNU Linux and MacOS
+Works on 
+- GNU/Linux 
+- MacOS
 
-_depends: curl, xclip, pbcopy(on MacOS) _
+Depends: 
+- curl 
+- xclip
+- pbcopy(MacOS)
+
+Usage:
+To short links:
+```
+yourl.sh 'http://www.urtoshortner.com'
+```
+
+To sent files:
+```
+yourl.sh '/Path/To/Your/File'
+```
 
 
----
-### Notes
+### Disclamer
 Maximum file size: 512.0 MiB
-
-Blocked file types: application/x-dosexec, application/x-executable, application/x-hdf5, application/java-archive, Android APKs and system images
+Blocked file types: application/x-dosexec, application/x-executable, application/x-hdf5, application/java-archive, Android APKs and system images.
 
 TERMS OF SERVICE
 ----------------
@@ -43,6 +54,3 @@ This is NOT a platform for:
 - CI build artifacts
 - doxxing, database dumps containing personal information
 - anything illegal under German law
-    
-    
-    
