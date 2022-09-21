@@ -11,8 +11,14 @@
 version='1.7'
 
 usage="yourl.sh - URL shortner and upload files from bash to 0x0.st
-Usage:
+                            _ 
+  _   _   ___   _   _  _ __ | |
+ | | | | / _ \ | | | || '__|| |
+ | |_| || (_) || |_| || |   | |
+  \__, | \___/  \__,_||_|   |_|
+  |___/                        
 
+  Usage:
     To short links:
         yourl.sh 'URL'
     To sent files:
