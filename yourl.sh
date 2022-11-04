@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
 
-#---------------------------------------------------------------------|
+#----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
-#  Blau Araujo
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2021 v1.7  GPL3
+#  30/03/2021 GPL3
 #  URL shortner and upload files from bash to 0x0.st.
-#---------------------------------------------------------------------|
+#----------------------------------------------------|
 
-version='1.7'
+version='1.9'
 
 usage="yourl.sh - URL shortner and upload files from bash to 0x0.st
 
@@ -25,7 +24,7 @@ usage="yourl.sh - URL shortner and upload files from bash to 0x0.st
     To sent files:
         yourl.sh 'ARQUIVO'
 
-Opções:
+Options:
 
     -h|--help      Shows help and exit.
     -v|--version   Show running version and exit.
