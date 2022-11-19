@@ -7,7 +7,7 @@
 #  URL shortner and upload files from bash to 0x0.st.
 #----------------------------------------------------|
 
-version='1.9'
+version='2.0'
 
 usage="yourl.sh - URL shortner and upload files from bash to 0x0.st
 
@@ -20,9 +20,9 @@ usage="yourl.sh - URL shortner and upload files from bash to 0x0.st
 
   Usage:
     To short links:
-        yourl.sh 'URL'
+        yourl.sh 'URL' URL shortner by http://tinyurl.com
     To sent files:
-        yourl.sh 'ARQUIVO'
+        yourl.sh 'FILE' File sent to https://0x0.st 
 
 Options:
 
