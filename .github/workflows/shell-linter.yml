@@ -32,4 +32,4 @@ jobs:
         uses: azohra/shell-linter@latest
         with:
           path: "*.sh"
-          severity: "style"
+          severity: "error"
