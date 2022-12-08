@@ -11,7 +11,10 @@ $$\   $$ |
 \$$$$$$  |                                        
  \______/ 
  ```
+[![Release](https://img.shields.io/badge/release-1.0-brightgreen)](https://github.com/mateuscomh/yoURL/releases)
+[![Build Status](https://github.com/mateuscomh/yoURL/actions/workflows/shell-linter.yml/badge.svg)](https://github.com/mateuscomh/yoURL/actions/workflows/shell-linter.yml)
 
+https://github.com/mateuscomh/yoURL/actions/workflows/build.yml
 # URL shortner and upload files direct from terminal
 Send files direct from terminal to https://0x0.st or short url by https://tinyurl.com
 
