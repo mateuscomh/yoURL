@@ -34,18 +34,24 @@ op_short='short link '
 op_upload='file sent'
 
 case "$1" in
-    '' | -h | --help)   echo "$usage"; exit;;
-    -v | --version)     echo "$version"; exit;;
+'' | -h | --help)
+  echo "$usage"
+  exit
+  ;;
+-v | --version)
+  echo "$version"
+  exit
+  ;;
 esac
 
 if [[ -f "$1" ]]; then
   # If $1 is file
-    read <<< $(curl -sF "file=@$1" https://0x0.st | sed -e "s/<.*//")
-    op="$op_upload"
+  read -r <<<"$(curl -sF "file=@$1" https://0x0.st | sed -e "s/<.*//")"
+  op="$op_upload"
 else
   # If $1 is a url
-    read <<< $(curl -s http://tinyurl.com/api-create.php?url="$1")
-    op="$op_short"
+  read -r <<<"$(curl -s http://tinyurl.com/api-create.php?url="$1")"
+  op="$op_short"
 fi
 
 # Validate read input and exit if error
@@ -53,8 +59,8 @@ fi
 
 # Print url shorted on bash
 #echo "$REPLY"
-command -v qrencode &> /dev/null && qrencode -m 2 -t ANSIUTF8 "$REPLY" 
-echo $REPLY
+command -v qrencode &>/dev/null && qrencode -m 2 -t ANSIUTF8 "$REPLY"
+echo "$REPLY"
 
 # Send a shorted url to clippboard Linux/MacOS
-command -v xclip &> /dev/null && echo -n "$REPLY" | xclip -sel copy || echo -n "$REPLY" | pbcopy 2> /dev/null
+command -v xclip &>/dev/null && echo -n "$REPLY" | xclip -sel copy || echo -n "$REPLY" | pbcopy 2>/dev/null
