@@ -7,7 +7,7 @@
 #  URL shortner and upload files from bash to 0x0.st.
 #----------------------------------------------------|
 
-version='2.0'
+version='2.1.0'
 
 usage="yourl.sh - URL shortner and upload files from bash to 0x0.st
 
@@ -52,7 +52,9 @@ fi
 [[ -z "$REPLY" || "$REPLY" = 'Error' ]] && exit 1
 
 # Print url shorted on bash
-echo "$REPLY"
+#echo "$REPLY"
+command -v qrencode &> /dev/null && qrencode -m 2 -t ANSIUTF8 "$REPLY" 
+echo $REPLY
 
 # Send a shorted url to clippboard Linux/MacOS
-command -v xclip > /dev/null && echo -n "$REPLY" | xclip -sel copy || echo -n "$REPLY" | pbcopy 2> /dev/null
+command -v xclip &> /dev/null && echo -n "$REPLY" | xclip -sel copy || echo -n "$REPLY" | pbcopy 2> /dev/null

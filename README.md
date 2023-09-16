@@ -20,16 +20,19 @@ Send files direct from terminal to https://0x0.st or short url by https://tinyur
 Works on 
 - GNU/Linux 
 - MacOS
+- WSL2
 
 Depends: 
 - curl 
+- qrencode
 - xclip
 - pbcopy(MacOS)
+
 
 Usage:
 To short links:
 ```
-yourl.sh 'http://www.urtoshortner.com'
+yourl.sh 'http://www.URLtoShortner.com'
 ```
 
 To sent files:
@@ -56,3 +59,14 @@ This is NOT a platform for:
 - CI build artifacts
 - doxxing, database dumps containing personal information
 - anything illegal under German law
+
+## Licensing Your Contributions
+
+Please note that when contributing to this project, you agree to license your contributions under the terms of the GPL-3.
+
+## How to Obtain GPL-3
+
+The GNU General Public License version 3 (GPL-3) is included in this repository as `LICENSE`. You can also [find a complete copy of GPL-3 here](https://www.gnu.org/licenses/gpl-3.0.html).
+
+---
+
