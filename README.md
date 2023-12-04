@@ -1,5 +1,4 @@
 ```
-
 ██╗   ██╗ ██████╗ ██╗   ██╗██████╗ ██╗     
 ╚██╗ ██╔╝██╔═══██╗██║   ██║██╔══██╗██║     
  ╚████╔╝ ██║   ██║██║   ██║██████╔╝██║     
@@ -13,31 +12,28 @@
 # URL shortner and upload files direct from terminal
 Send files direct from terminal to https://0x0.st or short URL by https://tinyurl.com
 
-Works on 
-- GNU/Linux 
+Works on
+- GNU/Linux
 - macOS
 - WSL2
 
-Depends: 
-- curl 
+Depends:
+- curl
 - qrencode
 - xclip
 - pbcopy(macOS)
-
 
 Usage:
 To short links:
 ```
 yourl.sh 'http://www.URLtoShortner.com'
 ```
-
 To sent files:
 ```
 yourl.sh '/Path/To/Your/File'
 ```
 
-
-### Disclamer
+## Disclamer
 Maximum file size: 512.0 MiB
 Blocked file types: application/x-dosexec, application/x-executable, application/x-hdf5, application/java-archive, Android APKs and system images.
 
@@ -62,4 +58,3 @@ Please note that when contributing to this project, you agree to license your co
 [complete copy of GPL-3 here](https://www.gnu.org/licenses/gpl-3.0.html).
 
 ---
-
