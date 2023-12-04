@@ -19,7 +19,7 @@ jobs:
         env:
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: "main"
-          BASH_SEVERITY: "error"
+          BASH_SEVERITY: "style"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   run-shellcheck:
