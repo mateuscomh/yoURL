@@ -63,10 +63,7 @@ This is NOT a platform for:
 ## Licensing Your Contributions
 
 Please note that when contributing to this project, you agree to license your contributions under the terms of the GPL-3.
-
-## How to Obtain GPL-3
-
-The GNU General Public License version 3 (GPL-3) is included in this repository as `LICENSE`. You can also [find a complete copy of GPL-3 here](https://www.gnu.org/licenses/gpl-3.0.html).
+[complete copy of GPL-3 here](https://www.gnu.org/licenses/gpl-3.0.html).
 
 ---
 
