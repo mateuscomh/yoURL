@@ -11,18 +11,18 @@
 [![Build Status](https://github.com/mateuscomh/yoURL/actions/workflows/shell-linter.yml/badge.svg)](https://github.com/mateuscomh/yoURL/actions/workflows/shell-linter.yml)
 
 # URL shortner and upload files direct from terminal
-Send files direct from terminal to https://0x0.st or short url by https://tinyurl.com
+Send files direct from terminal to https://0x0.st or short URL by https://tinyurl.com
 
 Works on 
 - GNU/Linux 
-- MacOS
+- macOS
 - WSL2
 
 Depends: 
 - curl 
 - qrencode
 - xclip
-- pbcopy(MacOS)
+- pbcopy(macOS)
 
 
 Usage:
