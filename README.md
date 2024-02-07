@@ -6,7 +6,7 @@
    ██║   ╚██████╔╝╚██████╔╝██║  ██║███████╗
    ╚═╝    ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝     
  ```
-[![Release](https://img.shields.io/badge/release-1.0-brightgreen)](https://github.com/mateuscomh/yoURL/releases)
+[![Release](https://img.shields.io/badge/release-2.1.0-brightgreen)](https://github.com/mateuscomh/yoURL/releases)
 [![Build Status](https://github.com/mateuscomh/yoURL/actions/workflows/shell-linter.yml/badge.svg)](https://github.com/mateuscomh/yoURL/actions/workflows/shell-linter.yml)
 
 # URL shortner and upload files direct from terminal
