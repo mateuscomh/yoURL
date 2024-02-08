@@ -31,4 +31,4 @@ jobs:
         uses: azohra/shell-linter@latest
         with:
           path: "yourl.sh"
-          severity: "style"
+          severity: "error"
