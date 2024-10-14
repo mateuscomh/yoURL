@@ -3,21 +3,22 @@
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2021 GPL3
+#  30/03/2023 GPL3
 #  URL shortner and upload files from bash to 0x0.st.
 #----------------------------------------------------|
 
-version='2.1.0'
+version='2.1.2'
 
-usage="yourl.sh - URL shortner and upload files from bash to 0x0.st
-
+logo="
 ██╗   ██╗ ██████╗ ██╗   ██╗██████╗ ██╗     
 ╚██╗ ██╔╝██╔═══██╗██║   ██║██╔══██╗██║     
  ╚████╔╝ ██║   ██║██║   ██║██████╔╝██║     
   ╚██╔╝  ██║   ██║██║   ██║██╔══██╗██║     
    ██║   ╚██████╔╝╚██████╔╝██║  ██║███████╗
-   ╚═╝    ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝     
+   ╚═╝    ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝ 
+"
 
+usage="yourl.sh - URL shortner and upload files from bash to 0x0.st
   Usage:
     To short links:
         yourl.sh 'URL' URL shortner by http://tinyurl.com
@@ -35,7 +36,7 @@ op_upload='file sent'
 
 case "$1" in
 '' | -h | --help)
-  echo "$usage"
+  echo "$logo $usage"
   exit
   ;;
 -v | --version)
@@ -58,9 +59,9 @@ fi
 [[ -z "$REPLY" || "$REPLY" = 'Error' ]] && exit 1
 
 # Print url shorted on bash
-#echo "$REPLY"
+echo "$logo URL created:"
 command -v qrencode &>/dev/null && qrencode -m 2 -t ANSIUTF8 "$REPLY"
 echo "$REPLY"
 
 # Send a shorted url to clippboard Linux/MacOS
-command -v xclip &>/dev/null && echo -n "$REPLY" | xclip -sel copy || echo -n "$REPLY" | pbcopy 2>/dev/null
+command -v xclip &>/dev/null && echo -n "$logo $REPLY" | xclip -sel copy || echo -n "$REPLY" | pbcopy 2>/dev/null
