@@ -53,7 +53,6 @@ This is NOT a platform for:
 
 ## Licensing Your Contributions
 
-Please note that when contributing to this project, you agree to license your contributions under the terms of the GPL-3.
-[complete copy of GPL-3 here](https://www.gnu.org/licenses/gpl-3.0.html).
+Please note that when contributing to this project, you agree to license your contributions under the terms of the [GPL-3](https://www.gnu.org/licenses/gpl-3.0.html).
 
 ---
