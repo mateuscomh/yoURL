@@ -5,6 +5,7 @@
 #  https://github.com/mateuscomh/yoURL
 #  30/03/2023 GPL3
 #  URL shortner and upload files from bash to 0x0.st.
+#  Deps: qrencode, curl, xclip, pbcopy (MacOS)
 #----------------------------------------------------|
 
 version='2.1.2'
