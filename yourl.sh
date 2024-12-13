@@ -53,7 +53,8 @@ if [[ -f "$1" ]]; then
 else
   # If $1 is a url
   read -r <<<"$(curl -s http://tinyurl.com/api-create.php?url="$1")"
-  op="$op_short"
+# shellcheck disable=SC2034
+ op="$op_short"
 fi
 
 # Validate read input and exit if error
