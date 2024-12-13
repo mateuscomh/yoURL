@@ -5,10 +5,10 @@
 #  https://github.com/mateuscomh/yoURL
 #  30/03/2023 GPL3
 #  URL shortner and upload files from bash to 0x0.st.
-#  Deps: qrencode, curl, xclip, pbcopy (MacOS)
+#  Deps: qrencode/zbar, curl, xclip, pbcopy (MacOS)
 #----------------------------------------------------|
 
-version='2.1.2'
+version='2.2.1'
 
 logo="
 ██╗   ██╗ ██████╗ ██╗   ██╗██████╗ ██╗     
@@ -32,9 +32,6 @@ Options:
     -v|--version   Show running version and exit.
 "
 
-op_short='short link '
-op_upload='file sent'
-
 case "$1" in
 '' | -h | --help)
   echo "$logo $usage"
@@ -49,12 +46,9 @@ esac
 if [[ -f "$1" ]]; then
   # If $1 is file
   read -r <<<"$(curl -sF "file=@$1" https://0x0.st | sed -e "s/<.*//")"
-  op="$op_upload"
 else
   # If $1 is a url
   read -r <<<"$(curl -s http://tinyurl.com/api-create.php?url="$1")"
-# shellcheck disable=SC2034
- op="$op_short"
 fi
 
 # Validate read input and exit if error
@@ -66,4 +60,4 @@ command -v qrencode &>/dev/null && qrencode -m 2 -t ANSIUTF8 "$REPLY"
 echo "$REPLY"
 
 # Send a shorted url to clippboard Linux/MacOS
-command -v xclip &>/dev/null && echo -n "$logo $REPLY" | xclip -sel copy || echo -n "$REPLY" | pbcopy 2>/dev/null
+command -v xclip &>/dev/null && echo -n "$REPLY" | xclip -sel copy || echo -n "$REPLY" | pbcopy 2>/dev/null
