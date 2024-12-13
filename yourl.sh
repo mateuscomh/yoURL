@@ -8,7 +8,7 @@
 #  Deps: qrencode/zbar, curl, xclip, pbcopy (MacOS)
 #----------------------------------------------------|
 
-version='2.2.1'
+version='2.2.3'
 
 logo="
 ██╗   ██╗ ██████╗ ██╗   ██╗██████╗ ██╗     
@@ -60,4 +60,7 @@ command -v qrencode &>/dev/null && qrencode -m 2 -t ANSIUTF8 "$REPLY"
 echo "$REPLY"
 
 # Send a shorted url to clippboard Linux/MacOS
-command -v xclip &>/dev/null && echo -n "$REPLY" | xclip -sel copy || echo -n "$REPLY" | pbcopy 2>/dev/null
+case $(command -v xclip &>/dev/null && echo "xclip" || echo "pbcopy") in
+    xclip) echo -n "$REPLY" | xclip -sel copy ;;
+    pbcopy) echo -n "$REPLY" | pbcopy 2>/dev/null ;;
+esac
