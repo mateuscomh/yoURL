@@ -34,21 +34,21 @@ Options:
 
 case "$1" in
 '' | -h | --help)
-  echo "$logo $usage"
-  exit
-  ;;
+	echo "$logo $usage"
+	exit
+	;;
 -v | --version)
-  echo "$version"
-  exit
-  ;;
+	echo "$version"
+	exit
+	;;
 esac
 
 if [[ -f "$1" ]]; then
-  # If $1 is file
-  read -r <<<"$(curl -sF "file=@$1" https://0x0.st | sed -e "s/<.*//")"
+	# If $1 is file
+	read -r <<<"$(curl -sF "file=@$1" https://0x0.st | sed -e "s/<.*//")"
 else
-  # If $1 is a url
-  read -r <<<"$(curl -s http://tinyurl.com/api-create.php?url="$1")"
+	# If $1 is a url
+	read -r <<<"$(curl -s http://tinyurl.com/api-create.php?url="$1")"
 fi
 
 # Validate read input and exit if error
@@ -61,6 +61,6 @@ echo "$REPLY"
 
 # Send a shorted url to clippboard Linux/MacOS
 case $(command -v xclip &>/dev/null && echo "xclip" || echo "pbcopy") in
-    xclip) echo -n "$REPLY" | xclip -sel copy ;;
-    pbcopy) echo -n "$REPLY" | pbcopy 2>/dev/null ;;
+  xclip) echo -n "$REPLY" | xclip -sel copy ;;
+  pbcopy) echo -n "$REPLY" | pbcopy 2>/dev/null ;;
 esac
