@@ -52,7 +52,9 @@ else
 fi
 
 # Validate read input and exit if error
-[[ -z "$REPLY" || "$REPLY" = 'Error' ]] && exit 1
+[[ -z "$REPLY" || "$REPLY" = 'Error' ]] && \
+  echo "error: $1 is a invalid argment (not a file neither a URL)" >&2 && \
+  exit 1
 
 # Print url shorted on bash
 echo "$logo URL created:"
