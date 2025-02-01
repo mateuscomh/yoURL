@@ -15,14 +15,6 @@ jobs:
           path: "*.sh"
           severity: "warning"
 
-      - name: Lint Code Base
-        uses: github/super-linter@v4
-        env:
-          VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: "main"
-          BASH_SEVERITY: "error"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   run-shellcheck:
     runs-on: ubuntu-latest
     steps:
