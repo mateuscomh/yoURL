@@ -8,7 +8,7 @@
 #  Deps: qrencode/zbar, curl, xclip, pbcopy (MacOS)
 #----------------------------------------------------|
 
-version='2.3.3'
+version='2.3.4'
 
 logo="
 ██╗   ██╗ ██████╗ ██╗   ██╗██████╗ ██╗     
@@ -52,9 +52,9 @@ else
 fi
 
 # Validate read input and exit if error
-[[ -z "$REPLY" || "$REPLY" = 'Error' ]] && \
-  echo "error: $1 is a invalid argment (not a file neither a URL)" >&2 && \
-  exit 1
+[[ -z "$REPLY" || "$REPLY" = 'Error' ]] &&
+	echo "error: $1 is a invalid argment (not a file neither a URL)" >&2 &&
+	exit 1
 
 # Print url shorted on bash
 echo "$logo URL created:"
@@ -63,12 +63,12 @@ echo "$REPLY"
 
 # Send a shorted url to clippboard GNU-Linux/MacOS
 case $(command -v xclip &>/dev/null && echo "xclip" || echo "pbcopy") in
-  xclip) 
-    if grep -iq Microsoft /proc/version; then
-      printf "%s" "$REPLY" | clip.exe 
-    elif command -v xclip > /dev/null; then
-      echo -n "$REPLY" | xclip -sel copy
-    fi 
-    ;;
-  pbcopy) echo -n "$REPLY" | pbcopy 2>/dev/null ;;
+xclip)
+	if grep -iq Microsoft /proc/version; then
+		printf "%s" "$REPLY" | clip.exe
+	elif command -v xclip >/dev/null; then
+		echo -n "$REPLY" | xclip -sel copy
+	fi
+	;;
+pbcopy) echo -n "$REPLY" | pbcopy 2>/dev/null ;;
 esac
