@@ -8,7 +8,7 @@
 #  Deps: qrencode/zbar, curl, xclip, pbcopy (MacOS)
 #----------------------------------------------------|
 
-version='2.3.4'
+version='2.3.5'
 
 logo="
 ██╗   ██╗ ██████╗ ██╗   ██╗██████╗ ██╗     
@@ -66,7 +66,7 @@ case $(command -v xclip &>/dev/null && echo "xclip" || echo "pbcopy") in
 xclip)
 	if grep -iq Microsoft /proc/version; then
 		printf "%s" "$REPLY" | clip.exe
-	elif command -v xclip >/dev/null; then
+	elif command -v xclip >/dev/null && [ -n "$DISPLAY" ]; then
 		echo -n "$REPLY" | xclip -sel copy
 	fi
 	;;
