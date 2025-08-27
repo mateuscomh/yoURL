@@ -8,7 +8,7 @@
 #  Deps: qrencode/zbar, curl, xclip, pbcopy (MacOS)
 #----------------------------------------------------|
 
-version='2.3.5'
+version='2.4.5'
 
 logo="
 ██╗   ██╗ ██████╗ ██╗   ██╗██████╗ ██╗     
@@ -45,7 +45,11 @@ esac
 
 if [[ -f "$1" ]]; then
 	# If $1 is file
-	read -r <<<"$(curl -sF "file=@$1" https://0x0.st | sed -e "s/<.*//")"
+	read -r <<<"$(curl -sF "file=@$1" https://0x0.st | sed -e "s/<.*//")" \
+	|| read -r <<< "$(curl -sF 'clbin=<-' https://clbin.com < "$1" | grep -o 'hxxps://.*' | sed 's/hxxps/https/')"
+	[[ -z "$REPLY" ]] && \
+		read -r <<<"$(curl -sF 'clbin=<-' https://clbin.com < "$1" | grep -o 'https://.*')"
+
 else
 	# If $1 is a url
 	read -r <<<"$(curl -s http://tinyurl.com/api-create.php?url="$1")"
