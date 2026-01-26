@@ -1,15 +1,13 @@
 #!/usr/bin/env bash
-
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2023 GPL3
-#  URL shortner and upload files from bash to 0x0.st.
-#  Deps: qrencode/zbar, curl, xclip, pbcopy (MacOS)
+#  Modified version with local pastebin support
+#  URL shortner and upload files from bash
 #----------------------------------------------------|
+version='2.6.1'
 
-version='2.4.5'
-
+PASTEBIN_URL="${PASTEBIN_URL:-http://localhost:9998}"
 logo="
 ██╗   ██╗ ██████╗ ██╗   ██╗██████╗ ██╗     
 ╚██╗ ██╔╝██╔═══██╗██║   ██║██╔══██╗██║     
@@ -18,61 +16,130 @@ logo="
    ██║   ╚██████╔╝╚██████╔╝██║  ██║███████╗
    ╚═╝    ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝ 
 "
-
-usage="yourl.sh - URL shortner and upload files from bash to 0x0.st
+usage="yourl.sh - URL shortner and upload files from bash
   Usage:
     To short links:
         yourl.sh 'URL' URL shortner by http://tinyurl.com
-    To sent files:
-        yourl.sh 'FILE' File sent to https://0x0.st 
-
+    To send files:
+        yourl.sh 'FILE' File sent to local pastebin server
+                        Falls back to termbin.com if local server is unavailable
+        
+  Environment Variables:
+    PASTEBIN_URL   Set your pastebin server URL (default: http://localhost:8000)
+                   Example: export PASTEBIN_URL=http://192.168.1.100:8000
+                   
+  Dependencies:
+    - curl (required)
+    - nc/netcat (required for termbin.com fallback)
+    - xclip or pbcopy (optional, for clipboard)
+    - qrencode (optional, for QR codes)
+    
 Options:
-
     -h|--help      Shows help and exit.
     -v|--version   Show running version and exit.
 "
 
+is_url() {
+    local input="$1"
+    # Check for http(s):// prefix
+    [[ "$input" =~ ^https?:// ]] && return 0
+    # Check for www. prefix
+    [[ "$input" =~ ^www\. ]] && return 0
+    # Check for domain pattern (e.g., google.com, github.com)
+    [[ "$input" =~ ^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?)+$ ]] && return 0
+    return 1
+}
+
+check_pastebin() {
+    curl -sf -m 2 "$PASTEBIN_URL" &>/dev/null
+}
+
+upload_file() {
+    local file="$1" response url use_termbin=false
+    
+    # Check pastebin availability
+    if ! check_pastebin; then
+        echo "⚠️  Local pastebin unavailable at $PASTEBIN_URL" >&2
+        read -p "Use termbin.com (external)? [Y/n]: " choice
+        [[ "$choice" =~ ^[Nn] ]] && { echo "Cancelled." >&2; return 1; }
+        use_termbin=true
+    fi
+    
+    # Try local pastebin
+    if [[ "$use_termbin" == false ]]; then
+        response=$(curl -sS -m 5 -X POST "$PASTEBIN_URL" -F "file=@$file" 2>&1)
+        
+        if [[ $? -eq 0 && -n "$response" ]]; then
+            url=$(echo "$response" | tr -d '\n\r' | xargs)
+            
+            if [[ "$url" =~ ^https?:// ]]; then
+                echo "$url"
+                return 0
+            elif [[ -n "$url" ]]; then
+                echo "$PASTEBIN_URL/${url#/}"
+                return 0
+            fi
+        fi
+        
+        # Local failed, ask for termbin
+        echo "Upload failed." >&2
+        read -p "Try termbin.com instead? [Y/n]: " choice
+        [[ "$choice" =~ ^[Nn] ]] && { echo "Cancelled." >&2; return 1; }
+        use_termbin=true
+    fi
+    
+    # Use termbin
+    if [[ "$use_termbin" == true ]]; then
+        command -v nc &>/dev/null || { echo "Error: nc required for termbin" >&2; return 1; }
+        
+        response=$(cat "$file" | nc termbin.com 9999 2>&1)
+        url=$(echo "$response" | tr -d '\n\r' | xargs)
+        
+        [[ "$url" =~ ^https?:// ]] && { echo "$url"; return 0; }
+    fi
+    
+    echo "Error: Upload failed" >&2
+    return 1
+}
+
+# Parse arguments
 case "$1" in
-'' | -h | --help)
-	echo "$logo $usage"
-	exit
-	;;
--v | --version)
-	echo "$version"
-	exit
-	;;
+    ''|-h|--help) echo "$logo"; echo "$usage"; exit 0 ;;
+    -v|--version) echo "$version"; exit 0 ;;
 esac
 
-if [[ -f "$1" ]]; then
-	# If $1 is file
-	read -r <<<"$(curl -sF "file=@$1" https://0x0.st | sed -e "s/<.*//")" \
-	|| read -r <<< "$(curl -sF 'clbin=<-' https://clbin.com < "$1" | grep -o 'hxxps://.*' | sed 's/hxxps/https/')"
-	[[ -z "$REPLY" ]] && \
-		read -r <<<"$(curl -sF 'clbin=<-' https://clbin.com < "$1" | grep -o 'https://.*')"
+[[ -z "$1" ]] && { echo "Error: No argument" >&2; exit 1; }
 
+# Process file or URL
+if [[ -f "$1" ]]; then
+    read -r REPLY < <(upload_file "$1")
+elif [[ -e "$1" ]]; then
+    echo "Error: Not a regular file" >&2; exit 1
+elif is_url "$1"; then
+    url="$1"
+    # Add http:// if no protocol
+    [[ ! "$url" =~ ^https?:// ]] && url="http://$url"
+    # URL encode the URL for tinyurl API
+    encoded_url=$(printf %s "$url" | jq -sRr @uri 2>/dev/null || python3 -c "import urllib.parse; print(urllib.parse.quote('''$url''', safe=':/'))" 2>/dev/null || echo "$url")
+    read -r REPLY < <(curl -sS "http://tinyurl.com/api-create.php?url=$encoded_url")
 else
-	# If $1 is a url
-	read -r <<<"$(curl -s http://tinyurl.com/api-create.php?url="$1")"
+    echo "Error: '$1' is not a file or URL" >&2; exit 1
 fi
 
-# Validate read input and exit if error
-[[ -z "$REPLY" || "$REPLY" = 'Error' ]] &&
-	echo "error: $1 is a invalid argment (not a file neither a URL)" >&2 &&
-	exit 1
+# Validate result
+[[ -z "$REPLY" || "$REPLY" == *"error"* ]] && { echo "Error: Failed to process" >&2; exit 1; }
 
-# Print url shorted on bash
-echo "$logo URL created:"
+# Output
+echo "$logo"
+echo "URL created:"
 command -v qrencode &>/dev/null && qrencode -m 2 -t ANSIUTF8 "$REPLY"
 echo "$REPLY"
 
-# Send a shorted url to clippboard GNU-Linux/MacOS
-case $(command -v xclip &>/dev/null && echo "xclip" || echo "pbcopy") in
-xclip)
-	if grep -iq Microsoft /proc/version; then
-		printf "%s" "$REPLY" | clip.exe
-	elif command -v xclip >/dev/null && [ -n "$DISPLAY" ]; then
-		echo -n "$REPLY" | xclip -sel copy
-	fi
-	;;
-pbcopy) echo -n "$REPLY" | pbcopy 2>/dev/null ;;
-esac
+# Clipboard
+if command -v xclip &>/dev/null && [ -n "$DISPLAY" ]; then
+    echo -n "$REPLY" | xclip -sel copy && echo "(Copied to clipboard)" >&2
+elif command -v pbcopy &>/dev/null; then
+    echo -n "$REPLY" | pbcopy && echo "(Copied to clipboard)" >&2
+elif grep -iq Microsoft /proc/version 2>/dev/null; then
+    printf "%s" "$REPLY" | clip.exe
+fi
