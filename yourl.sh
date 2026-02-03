@@ -17,7 +17,8 @@ logo="
    ╚═╝    ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝ 
 "
 usage="yourl.sh - URL shortner and upload files from bash
-  Usage:
+Version: $version
+    Usage:
     To short links:
         yourl.sh 'URL' URL shortner by http://tinyurl.com
     To send files:
